@@ -1,0 +1,37 @@
+name: Octocat .NET Awakening
+
+on:
+  push:
+    branches: [ "main" ]
+  schedule:
+    - cron: '0 * * * *'  # Executa a cada hora
+
+jobs:
+  tentacle-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Action pré-existente: Clona o repositório
+      - name: 🐙 Checkout do código
+        uses: actions/checkout@v4
+
+      # 2. Action pré-existente: Instala .NET
+      - name: ⚙️ Configurar SDK .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # 3. Restauração de dependências do projeto
+      - name: 🔄 Restaura pacotes
+        run: dotnet restore github4women/github4women.csproj
+
+      # 4. Compilação do projeto
+      - name: 🧱 Compila o projeto
+        run: dotnet build github4women/github4women.csproj --no-restore
+
+      # 5. Script personalizado com humor
+      - name: 📣 Mensagem do Octocat
+        run: |
+          echo "Compilação concluída com sucesso!"
+          echo "Octocat agora está pronto para dominar o oceano dos códigos!"
+          date
