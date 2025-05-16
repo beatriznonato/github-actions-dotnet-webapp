@@ -4,34 +4,34 @@ on:
   push:
     branches: [ "main" ]
   schedule:
-    - cron: '0 * * * *'  # Executa a cada hora
+    - cron: '0 * * * *'  # Runs every hour
 
 jobs:
   tentacle-build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Action pré-existente: Clona o repositório
-      - name: 🐙 Checkout do código
+      # 1. Pre-existing action: Checkout the repository
+      - name: 🐙 Checkout code
         uses: actions/checkout@v4
 
-      # 2. Action pré-existente: Instala .NET
-      - name: ⚙️ Configurar SDK .NET
+      # 2. Pre-existing action: Set up .NET SDK
+      - name: ⚙️ Set up .NET SDK
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
-      # 3. Restauração de dependências do projeto
-      - name: 🔄 Restaura pacotes
+      # 3. Restore project dependencies
+      - name: 🔄 Restore dependencies
         run: dotnet restore github4women/github4women.csproj
 
-      # 4. Compilação do projeto
-      - name: 🧱 Compila o projeto
+      # 4. Build the project
+      - name: 🧱 Build the project
         run: dotnet build github4women/github4women.csproj --no-restore
 
-      # 5. Script personalizado com humor
-      - name: 📣 Mensagem do Octocat
+      # 5. Custom script with humor
+      - name: 📣 Octocat's message
         run: |
-          echo "Compilação concluída com sucesso!"
-          echo "Octocat agora está pronto para dominar o oceano dos códigos!"
+          echo "Build completed successfully!"
+          echo "Octocat is now ready to conquer the code ocean!"
           date
